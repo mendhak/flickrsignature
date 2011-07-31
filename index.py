@@ -1,17 +1,16 @@
 from urlparse import urlparse
-from mod_python import Session
+from mod_python import Cookie
 import re
 import flickr
+import time
 
 def index(req):
 
 
-	session = Session.Session(req)
-
 	req.content_type="text/html"
 	qs = urlparse(req.subprocess_env['QUERY_STRING'])
 	
-	user = ''
+	nsid = ''
 	num = 1
 	size = 'm'
 	item = 'img'
@@ -29,19 +28,27 @@ def index(req):
 			if 'item' in params and len(params['item']) > 0:
 				item = params['item']
 
-			FFF = 0
-
-			if not re.match("([0-9]+@N[0-9]+)", params['user']) and not 'nsid' in session > 0:
-				user = flickr.getUserNSID('mendhak')
-				session['nsid'] = user
-				session.save()
-			elif len(session['nsid']) > 0:
-				user = session['nsid']
-			else:
-				user = params['user']
-							
-			return user
+			nsid = getNSID(req, params)
+			return nsid
+			
 	return 'No parameters supplied'
+
+
+def getNSID(req, params):
+	cookies = Cookie.get_cookies(req)
+	cookieKey = 'nsid_' + params['user']
+
+	if cookies.has_key(cookieKey):
+		nsid = cookies[cookieKey].value
+	elif not re.match("([0-9]+@N[0-9]+)", params['user']) and not cookieKey in cookies:
+		nsid = flickr.getUserNSID(params['user'])
+		c = Cookie.Cookie(cookieKey, nsid)
+		c.expires = time.time() + 30 * 24 * 60 * 60
+		Cookie.add_cookie(req, c)
+	else:
+		nsid = params['nsid']
+					
+	return nsid
 
 
 
