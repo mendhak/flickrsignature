@@ -1,11 +1,20 @@
-The aim is to allow for an easy to use URL that can get flickr images or redirect to flickr URLs.  The format will be, roughly:
+Easy Flickr URL
+==================
 
-example.com/mendhak/9/img/o
+The aim is to allow for an easy to use URL that can get flickr images or flickr URLs.  The Easy URL takes a username and image number.  For example:
 
-This means: For user mendhak, get the 9th latest image, in original size.
+example.com/mendhak/9/img/b
+
+This means: For user mendhak, get the 9th latest image, in size big.
 
 example.com/123452@N00/4/url
 
 This means:  For user with NSID 123452@N00, redirect me to the URL of their 4th photo
+
+
+This can have a few uses:
+
+*  You can use JavaScript against your flickr images (slideshows, badges, etc) without revealing your API key
+*  You can create badges, carousels, forum signatures such that they don't need to be updated
 
 
