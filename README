@@ -1,0 +1,11 @@
+The aim is to allow for an easy to use URL that can get flickr images or redirect to flickr URLs.  The format will be, roughly:
+
+example.com/mendhak/9/img/o
+
+This means: For user mendhak, get the 9th latest image, in original size.
+
+example.com/123452@N00/4/url
+
+This means:  For user with NSID 123452@N00, redirect me to the URL of their 4th photo
+
+
