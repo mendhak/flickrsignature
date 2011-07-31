@@ -11,6 +11,7 @@ def index(req):
 
 	apiKey = "a39dfdf51784c76fa3234f88bec38b0e"
 	qs = urlparse(req.subprocess_env['QUERY_STRING'])
+	destinationUrl = ""
 	
 	nsid = ''
 	num = 1
@@ -35,19 +36,22 @@ def index(req):
 			nsid = getNSID(req, apiKey, params['user'])
 			
 			photo = getPhoto(apiKey, nsid, num)
-			
+
 			if photo:
 				if item == 'img':
 					req.headers_out.add("Cache-Control", "private, max-age=3600")
-					redirectToImage(photo, size, req)
-				else:
-					redirectToPhotoPage(photo, nsid, req)
+					destinationUrl = getImageUrl(photo, size, req)
+
+				elif item == 'url':
+					destinationUrl = getPhotoPageUrl(photo, nsid, req)
+
+			util.redirect(req, location=destinationUrl, permanent=False)
 					
 			
 	return 'No parameters supplied'
 
 
-def redirectToImage(selectedPhoto, size, req):
+def getImageUrl(selectedPhoto, size, req):
 	size = size.lower()
 
 	if size == 'm' or size == 'medium' or size == 'med':
@@ -61,10 +65,10 @@ def redirectToImage(selectedPhoto, size, req):
 	elif size == 'b' or size == 'large' or size == 'big':
 		size = 'b'
 
-	photoUrl = "http://farm{0}.static.flickr.com/{1}/{2}_{3}_{4}.jpg".format(selectedPhoto.farm, selectedPhoto.server, selectedPhoto.id, selectedPhoto.secret, size)
-	util.redirect(req, location=photoUrl, permanent=False)
+	return "http://farm{0}.static.flickr.com/{1}/{2}_{3}_{4}.jpg".format(selectedPhoto.farm, selectedPhoto.server, selectedPhoto.id, selectedPhoto.secret, size)
 
-def redirectToPhotoPage(selectedPhoto, nsid, req):
+
+def getPhotoPageUrl(selectedPhoto, nsid, req):
 	photoPage = "http://www.flickr.com/photos/{0}/{1}".format(nsid, selectedPhoto.id)
 	util.redirect(req, location=photoPage, permanent=False) 
 
