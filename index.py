@@ -22,16 +22,16 @@ def index(req):
 		params = dict([part.split('=') for part in qs.geturl().split('&')])
 		if len(params) > 0:
 			user = params['user']
-			if 'num' in params and len(params['num']) > 0:
-				num = params['num']
+			if params.has_key('num') and len(params['num']) > 0 and params['num'].isdigit():
+				num = int(params['num'])
 				if num <= 0:
 					num = 1
-	
-			if 'size' in params and len(params['size']) > 0:
-				size = params['size']
 
-			if 'item' in params and len(params['item']) > 0:
-				item = params['item']
+			if params.has_key('size') and len(params['size']) > 0:
+				size = params['size'].lower()
+
+			if params.has_key('item') and len(params['item']) > 0:
+				item = params['item'].lower()
 
 			nsid = getNSID(req, apiKey, params['user'])
 			
@@ -42,7 +42,7 @@ def index(req):
 					req.headers_out.add("Cache-Control", "private, max-age=3600")
 					destinationUrl = getImageUrl(photo, size, req)
 
-				elif item == 'url':
+				else:
 					destinationUrl = getPhotoPageUrl(photo, nsid, req)
 
 			util.redirect(req, location=destinationUrl, permanent=False)
@@ -52,7 +52,6 @@ def index(req):
 
 
 def getImageUrl(selectedPhoto, size, req):
-	size = size.lower()
 
 	if size == 'm' or size == 'medium' or size == 'med':
 		size = 'm'
