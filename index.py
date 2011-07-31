@@ -1,8 +1,12 @@
 from urlparse import urlparse
+from mod_python import Session
 import re
 import flickr
 
 def index(req):
+
+
+	session = Session.Session(req)
 
 	req.content_type="text/html"
 	qs = urlparse(req.subprocess_env['QUERY_STRING'])
@@ -25,11 +29,17 @@ def index(req):
 			if 'item' in params and len(params['item']) > 0:
 				item = params['item']
 
-			if not re.match("([0-9]+@N[0-9]+)", params['user']):
+			FFF = 0
+
+			if not re.match("([0-9]+@N[0-9]+)", params['user']) and not 'nsid' in session > 0:
 				user = flickr.getUserNSID('mendhak')
+				session['nsid'] = user
+				session.save()
+			elif len(session['nsid']) > 0:
+				user = session['nsid']
 			else:
 				user = params['user']
-			
+							
 			return user
 	return 'No parameters supplied'
 
