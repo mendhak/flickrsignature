@@ -1,7 +1,9 @@
 from urlparse import urlparse
 import re
+import flickr
 
 def index(req):
+
 	req.content_type="text/html"
 	qs = urlparse(req.subprocess_env['QUERY_STRING'])
 	
@@ -23,8 +25,12 @@ def index(req):
 			if 'item' in params and len(params['item']) > 0:
 				item = params['item']
 
-			if not re.match("([0-9]+@N[0-9]+)", user):
-				return user +',' + str(num) + ',' + size + ',' + item
+			if not re.match("([0-9]+@N[0-9]+)", params['user']):
+				user = flickr.getUserNSID('mendhak')
+			else:
+				user = params['user']
+			
+			return user
 	return 'No parameters supplied'
 
 
