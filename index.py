@@ -38,6 +38,7 @@ def index(req):
 			
 			if photo:
 				if item == 'img':
+					req.headers_out.add("Cache-Control", "private, max-age=3600")
 					redirectToImage(photo, size, req)
 				else:
 					redirectToPhotoPage(photo, nsid, req)
