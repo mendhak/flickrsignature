@@ -3,11 +3,11 @@ Easy Flickr URL
 
 The aim is to allow for an easy to use URL that can get flickr images or flickr URLs.  The Easy URL takes a username and image number.  For example:
 
-example.com/**mendhak/9/img/b**
+example.com/**img/mendhak/9/b**
 
 This means: _For user **mendhak**, get the **9**th latest **image**, in size **big**._
 
-example.com/**123452@N00/4/url**
+example.com/**url/123452@N00/4**
 
 This means:  _For user with NSID **123452@N00**, **redirect** me to the URL of their **4**th photo_
 
