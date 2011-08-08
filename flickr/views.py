@@ -36,6 +36,11 @@ def redirect(request, nsid, num):
 	resp['Location'] = destinationUrl
 	return resp
 
+def nsid(request, username):
+	resp = HttpResponse()
+	nsid = getUserNSID(request, resp, apiKey, username)
+	resp.write(nsid)
+	return resp
 
 def getUserNSID(request, response, apiKey, username):
 	cookies = request.COOKIES
