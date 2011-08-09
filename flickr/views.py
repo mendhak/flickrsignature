@@ -1,4 +1,5 @@
 from django.http import HttpResponse, Http404
+from django.shortcuts import render_to_response
 import flickrapi
 import time
 import datetime
@@ -55,6 +56,10 @@ def getUserNSID(request, response, apiKey, username):
 		nsid = username
 	
 	return nsid
+
+
+def main(request):
+	return render_to_response('index.html', {'testvar': "TROLOLO"})
 
 
 def setCookie(response, cookieKey, nsid, expire=None):
