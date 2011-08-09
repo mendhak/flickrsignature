@@ -93,6 +93,25 @@
 		}
 		</style>
 
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+		<script type="text/javascript">
+
+			$(document).ready(function() {
+		
+					$('textarea').live('focus mouseup', function(e) {
+					if (e.type == 'focusin') {
+					this.select();
+					}
+
+					if (e.type == 'mouseup') {
+					return false;
+					}
+					});
+			});
+		
+		</script>
+
 	</head> 
 	 
 	<body> 
@@ -100,7 +119,7 @@
 		<div id="wrap"> 
 		 
 			 <div> 
-		   		<h1>Flickr Signature Generator</h1>
+		   		<h1><span style="color: #0063DC;">Flick</span><span style="color: #FF0084">r</span> Signature Generator</h1>
 				<p>Use this page to create a Flickr signature to use on forums, message boards, web pages and emails.  The photos will update automatically as you upload new photos or other photos become more popular.</p>
 
 				<p>My flickr username is 
@@ -140,7 +159,7 @@
 					</textarea>
 				</p>
 				<p class="tiny">BB code (message boards, forums):
-					<textarea id="htmlcode">
+					<textarea id="bbcode">
 						[url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url][url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url][url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url][url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url][url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url]
 					</textarea>
 				</p>
