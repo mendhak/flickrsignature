@@ -3,9 +3,16 @@ import urllib
 from xml.dom import minidom
 
 
-def getPhoto(apiKey, nsid, photoNumber):
+def getPhoto(apiKey, nsid, photoNumber, popular):
 
-	photoSearchUrl = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={0}&user_id={1}&per_page=1&page={2}".format(apiKey, nsid, photoNumber)
+	popular = popular.lower()
+
+	if popular == 'p':
+		popular = 'interestingness-desc'
+	else:
+		popular = 'date-posted-desc'
+
+	photoSearchUrl = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={0}&user_id={1}&per_page=1&page={2}&sort={3}".format(apiKey, nsid, photoNumber, popular)
 	dom = minidom.parse(urllib.urlopen(photoSearchUrl))
 
 	photoNode = dom.getElementsByTagName("photo")[0] 
@@ -41,6 +48,7 @@ def getPhotoPageUrl(selectedPhoto, nsid):
 
 def getImageUrl(selectedPhoto, size):
 
+	size = size.lower()
 	sizePrefix = '_'
 
 	if size == 'm' or size == 'small':

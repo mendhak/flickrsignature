@@ -6,8 +6,8 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^(?i)img/(?P<nsid>[A-Za-z0-9@]+)/?(?P<num>[0-9]+)?/?(?P<size>[A-Za-z0-9-]+)?/?', 'flickr.views.image'),
-    url(r'^(?i)url/(?P<nsid>[A-Za-z0-9@]+)/?(?P<num>[0-9]+)?', 'flickr.views.redirect'),
+    url(r'^(?i)img/(?P<nsid>[A-Za-z0-9@]+)/?(?P<num>[0-9]+)?/?(?P<size>[A-Za-z0-9-]+)?/?(?P<popular>[p]{1})?', 'flickr.views.image'),
+    url(r'^(?i)url/(?P<nsid>[A-Za-z0-9@]+)/?(?P<num>[0-9]+)?/?(?P<popular>[p]{1})?', 'flickr.views.redirect'),
     url(r'^(?i)nsid/(?P<username>.+)', 'flickr.views.nsid'),
     url(r'^$', 'flickr.views.main')
 

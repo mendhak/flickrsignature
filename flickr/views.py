@@ -12,27 +12,32 @@ import re
 apiKey = "a39dfdf51784c76fa3234f88bec38b0e"
 
 
-def image(request, nsid, num=1, size=''):
+def image(request, nsid, num=1, size='', popular=''):
 
 	if not num or not num.isdigit() or int(num) <= 0:
 		num = 1
 	if not size:
 		size = ''
+	if not popular :
+		popular = ''
 
 	resp = HttpResponse(status=302)
 	nsid = getUserNSID(request, resp, apiKey, nsid)
-	photo = flickrapi.getPhoto(apiKey, nsid, num)
+	photo = flickrapi.getPhoto(apiKey, nsid, num, popular)
 	destinationUrl = flickrapi.getImageUrl(photo, size)
 	resp['Cache-Control'] = "private, max-age=3600"	
 	resp['Location'] = destinationUrl
 	return resp
 
-def redirect(request, nsid, num):
+def redirect(request, nsid, num, popular):
 	if not num or not num.isdigit() or int(num) <= 0:
 		num = 1
+	if not popular:
+		popular = ''
+
 	resp = HttpResponse(status=302)
 	nsid = getUserNSID(request, resp, apiKey, nsid)
-	photo = flickrapi.getPhoto(apiKey, nsid, num)
+	photo = flickrapi.getPhoto(apiKey, nsid, num, popular)
 	destinationUrl = flickrapi.getPhotoPageUrl(photo, nsid)
 	resp['Location'] = destinationUrl
 	return resp
