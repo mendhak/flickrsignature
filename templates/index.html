@@ -97,6 +97,8 @@
 
 		<script type="text/javascript">
 
+			var domain = '{{ domain }}';
+
 			$(document).ready(function() {
 		
 					$('textarea').live('focus mouseup', function(e) {
@@ -108,7 +110,76 @@
 					return false;
 					}
 					});
+
+					$('#generate').click( function() { generateSignature(); } );
 			});
+
+			function generateSignature() { 
+				var username = $('#username').val();
+				var latest = $('#latest').val();
+				var sortby = $('#sort').val();
+				var size = $('#size').val();
+				var linkto = $('#linkto').val();
+				var overallAnchorStart = '';
+				var overallAnchorEnd = '';
+				var overallUrlStart = '';
+				var overallUrlEnd = '';
+				var individualLinks = false;
+				
+				if (! $.trim(username) == '') {
+					var nsidUrl = 'http://' +  domain + '/nsid/' + $('#username').val();
+					$.get(nsidUrl, function(data) {
+					  username = data;
+					});
+				}
+				else
+				{
+					alert('Please fill in a username');
+					return;
+				}
+
+				switch(linkto){
+					case '2':
+						overallAnchorStart = '<a href=\"http://www.flickr.com/photos/' + username + '\">';
+						overallAnchorEnd = '</a>';
+						overallUrlStart = '[url=http://www.flickr.com/photos/' + username + ']';
+						overallUrlEnd = '[/url]';
+						break;
+					case '1':
+						individualLinks = true;
+						break;
+						
+				}
+
+				var htmlCode;
+				var bbCode;
+				htmlCode = overallAnchorStart;	
+				bbCode = overallUrlStart;
+
+				for(i = 1; i <= latest; i++){
+					if(individualLinks){
+						var link = 'http://' + domain + '/url/' + username + '/' + i;
+						htmlCode += '<a href=\"' + link + '\">';
+						bbCode += '[url=' + link + ']';
+					}
+
+					var imgSrc = 'http://' + domain + '/img/' + username + '/' + i + '/' + size;
+					htmlCode += '<img src=\"' + imgSrc + '\" />';
+					bbCode += '[img]' + imgSrc + '[/img]';
+
+					if(individualLinks){
+						htmlCode += '</a>';
+						bbCode += '[/url]';
+					}
+
+				}
+
+				htmlCode += overallAnchorEnd;
+				$('#htmlcode').val(htmlCode);
+				$('#bbcode').val(bbCode);
+
+				
+			}
 		
 		</script>
 
@@ -120,15 +191,15 @@
 		 
 			 <div> 
 		   		<h1><span style="color: #0063DC;">Flick</span><span style="color: #FF0084">r</span> Signature Generator</h1>
-				<p>Use this page to create a Flickr signature to use on forums, message boards, web pages and emails.  The photos will update automatically as you upload new photos or other photos become more popular.</p>
+				<p>Use this page to create a Flickr signature to use on forums, message boards, web pages and emails.  The photos will <strong>update automatically</strong> as you upload new photos or other photos become more popular.</p>
 
 				<p>My flickr username is 
 					<input type="text" id="username" /> 
 					and I want my 
 					<input type="text" id="latest" maxlength="2" value="5" /> 
 					<select id="sort">
-						<option value="1">latest</option>
-						<option value="2">most popular</option>
+						<option value="date-posted-desc">latest</option>
+						<option value="interestingness-desc">most popular</option>
 					</select>
 					photos
 				</p>
@@ -137,10 +208,8 @@
 						<option value="s">small squares</option>
 						<option value="t">thumbnails</option>
 						<option value="m">small</option>
-						<option value="">medium</option>
 						<option value="z">medium 640</option>
 						<option value="b">large</option>
-						<option value="o">original</option>
 					</select>
 				and link the photos to
 					<select id="linkto">
@@ -150,7 +219,7 @@
 					</select>
 				</p>
 				<div id="generateDiv">
-					<a class="generate">Generate</a>			
+					<a class="generate" id="generate">Generate</a>			
 				</div>
 				<br />
 				<p class="tiny">HTML code (web pages, emails):
@@ -170,11 +239,11 @@
 		
 		<div id="preview">
 			
-				<a href="/url/mendhak/1"><img src="/img/mendhak/1/m" /></a>
+				<!--<a href="/url/mendhak/1"><img src="/img/mendhak/1/m" /></a>
 				<a href="/url/mendhak/2"><img src="/img/mendhak/2/m" /></a>
 				<a href="/url/mendhak/3"><img src="/img/mendhak/3/m" /></a>
 				<a href="/url/mendhak/4"><img src="/img/mendhak/4/m" /></a>
-				<a href="/url/mendhak/5"><img src="/img/mendhak/5/m" /></a>
+				<a href="/url/mendhak/5"><img src="/img/mendhak/5/m" /></a>-->
 			
 		</div>
 

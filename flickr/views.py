@@ -59,7 +59,7 @@ def getUserNSID(request, response, apiKey, username):
 
 
 def main(request):
-	return render_to_response('index.html', {'testvar': "TROLOLO"})
+	return render_to_response('index.html', {'domain': "localhost:8000"})
 
 
 def setCookie(response, cookieKey, nsid, expire=None):
