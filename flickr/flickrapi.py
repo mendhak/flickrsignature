@@ -41,9 +41,11 @@ def getPhotoPageUrl(selectedPhoto, nsid):
 
 def getImageUrl(selectedPhoto, size):
 
-	if size == 'm' or size == 'medium' or size == 'med':
+	sizePrefix = '_'
+
+	if size == 'm' or size == 'small':
 		size = 'm'
-	elif size == 's' or size == 'small':
+	elif size == 's' or size == 'square':
 		size = 's'
 	elif size == 't' or size == 'thumb' or size == 'thumbnail' or size == 'tiny':
 		size = 't'
@@ -51,8 +53,13 @@ def getImageUrl(selectedPhoto, size):
 		size = 'z'
 	elif size == 'b' or size == 'large' or size == 'big':
 		size = 'b'
+	elif size == '' or size == 'medium' or size == 'med':
+		sizePrefix =  ''
+		size = ''
 
-	return "http://farm{0}.static.flickr.com/{1}/{2}_{3}_{4}.jpg".format(selectedPhoto.farm, selectedPhoto.server, selectedPhoto.id, selectedPhoto.secret, size)
+	size = sizePrefix + size
+
+	return "http://farm{0}.static.flickr.com/{1}/{2}_{3}{4}.jpg".format(selectedPhoto.farm, selectedPhoto.server, selectedPhoto.id, selectedPhoto.secret, size)
 
 
 class FlickrPhoto:

@@ -12,12 +12,12 @@ import re
 apiKey = "a39dfdf51784c76fa3234f88bec38b0e"
 
 
-def image(request, nsid, num=1, size='b'):
+def image(request, nsid, num=1, size=''):
 
 	if not num or not num.isdigit() or int(num) <= 0:
 		num = 1
 	if not size:
-		size = 'b'
+		size = ''
 
 	resp = HttpResponse(status=302)
 	nsid = getUserNSID(request, resp, apiKey, nsid)
