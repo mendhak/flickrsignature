@@ -177,6 +177,8 @@
 				htmlCode += overallAnchorEnd;
 				$('#htmlcode').val(htmlCode);
 				$('#bbcode').val(bbCode);
+				$('#preview').html(htmlCode);
+				$('#preview').load(function(){ alert('done');});
 
 				
 			}
@@ -194,7 +196,7 @@
 				<p>Use this page to create a Flickr signature to use on forums, message boards, web pages and emails.  The photos will <strong>update automatically</strong> as you upload new photos or other photos become more popular.</p>
 
 				<p>My flickr username is 
-					<input type="text" id="username" /> 
+					<input type="text" id="username" value="mendhak" /> 
 					and I want my 
 					<input type="text" id="latest" maxlength="2" value="5" /> 
 					<select id="sort">
@@ -208,6 +210,7 @@
 						<option value="s">small squares</option>
 						<option value="t">thumbnails</option>
 						<option value="m">small</option>
+						<option value="">medium</option>
 						<option value="z">medium 640</option>
 						<option value="b">large</option>
 					</select>
@@ -223,14 +226,10 @@
 				</div>
 				<br />
 				<p class="tiny">HTML code (web pages, emails):
-					<textarea id="htmlcode">
-						<a href="/url/mendhak/1"><img src="/img/mendhak/1/s" /></a><a href="/url/mendhak/2"><img src="/img/mendhak/2/s" /></a><a href="/url/mendhak/3"><img src="/img/mendhak/3/s" /></a><a href="/url/mendhak/4"><img src="/img/mendhak/4/s" /></a><a href="/url/mendhak/5"><img src="/img/mendhak/5/s" /></a>
-					</textarea>
+					<textarea id="htmlcode"><a href="http://localhost:8000/url/mendhak/1"><img src="http://localhost:8000/img/mendhak/1/s" /></a><a href="http://localhost:8000/url/mendhak/2"><img src="http://localhost:8000/img/mendhak/2/s" /></a><a href="http://localhost:8000/url/mendhak/3"><img src="http://localhost:8000/img/mendhak/3/s" /></a><a href="http://localhost:8000/url/mendhak/4"><img src="http://localhost:8000/img/mendhak/4/s" /></a><a href="http://localhost:8000/url/mendhak/5"><img src="http://localhost:8000/img/mendhak/5/s" /></a></textarea>
 				</p>
 				<p class="tiny">BB code (message boards, forums):
-					<textarea id="bbcode">
-						[url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url][url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url][url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url][url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url][url="/url/mendhak/1"][img]/img/mendhak/1/s[/img][/url]
-					</textarea>
+					<textarea id="bbcode">[url=http://localhost:8000/url/mendhak/1][img]http://localhost:8000/img/mendhak/1/s[/img][/url][url=http://localhost:8000/url/mendhak/2][img]http://localhost:8000/img/mendhak/2/s[/img][/url][url=http://localhost:8000/url/mendhak/3][img]http://localhost:8000/img/mendhak/3/s[/img][/url][url=http://localhost:8000/url/mendhak/4][img]http://localhost:8000/img/mendhak/4/s[/img][/url][url=http://localhost:8000/url/mendhak/5][img]http://localhost:8000/img/mendhak/5/s[/img][/url]</textarea>
 				</p>
 				<br />
 			 </div> 
@@ -239,11 +238,7 @@
 		
 		<div id="preview">
 			
-				<!--<a href="/url/mendhak/1"><img src="/img/mendhak/1/m" /></a>
-				<a href="/url/mendhak/2"><img src="/img/mendhak/2/m" /></a>
-				<a href="/url/mendhak/3"><img src="/img/mendhak/3/m" /></a>
-				<a href="/url/mendhak/4"><img src="/img/mendhak/4/m" /></a>
-				<a href="/url/mendhak/5"><img src="/img/mendhak/5/m" /></a>-->
+				<a href="/url/mendhak/1"><img src="/img/mendhak/1/s" /></a><a href="/url/mendhak/2"><img src="/img/mendhak/2/s" /></a><a href="/url/mendhak/3"><img src="/img/mendhak/3/s" /></a><a href="/url/mendhak/4"><img src="/img/mendhak/4/s" /></a><a href="/url/mendhak/5"><img src="/img/mendhak/5/s" /></a>
 			
 		</div>
 
