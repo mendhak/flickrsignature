@@ -5,6 +5,7 @@ import time
 import datetime
 import re
 
+
 #https://docs.djangoproject.com/en/dev/faq/general/#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you-don-t-use-the-standard-names
 #This 'view' corresponds to the MVC 'controller'.  
 
@@ -64,7 +65,7 @@ def getUserNSID(request, response, apiKey, username):
 
 
 def main(request):
-	return render_to_response('index.html', {'domain': "localhost:8000"})
+	return render_to_response('index.html', {'domain': request.get_host()})
 
 
 def setCookie(response, cookieKey, nsid, expire=None):
