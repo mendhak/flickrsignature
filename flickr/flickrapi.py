@@ -65,7 +65,7 @@ def getImageUrl(selectedPhoto, size):
 		size = 'z'
 	elif size == 'b' or size == 'large' or size == 'big':
 		size = 'b'
-	elif size == '' or size == 'medium' or size == 'med':
+	elif size == '' or size == 'medium' or size == 'med' or size == 'x':
 		sizePrefix =  ''
 		size = ''
 

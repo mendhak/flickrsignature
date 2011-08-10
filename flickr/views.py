@@ -22,6 +22,9 @@ def image(request, nsid, num=1, size='', popular=''):
 	if not popular :
 		popular = ''
 
+
+
+
 	resp = HttpResponse(status=302)
 	nsid = getUserNSID(request, resp, apiKey, nsid)
 	photo = flickrapi.getPhoto(apiKey, nsid, num, popular)
