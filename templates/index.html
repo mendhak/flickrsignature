@@ -158,12 +158,12 @@
 
 				for(i = 1; i <= latest; i++){
 					if(individualLinks){
-						var link = 'http://' + domain + '/url/' + username + '/' + i;
+						var link = 'http://' + domain + '/url/' + username + '/' + i + '/' + sortby;
 						htmlCode += '<a href=\"' + link + '\">';
 						bbCode += '[url=' + link + ']';
 					}
 
-					var imgSrc = 'http://' + domain + '/img/' + username + '/' + i + '/' + size;
+					var imgSrc = 'http://' + domain + '/img/' + username + '/' + i + '/' + size + '/' + sortby;
 					htmlCode += '<img src=\"' + imgSrc + '\" />';
 					bbCode += '[img]' + imgSrc + '[/img]';
 
@@ -175,6 +175,11 @@
 				}
 
 				htmlCode += overallAnchorEnd;
+
+				//Cleanup, replace //" and //[
+				htmlCode = htmlCode.replace(/\/\/"/g, '"');
+				bbCode = bbCode.replace(/\/\/\[/g, "[");
+
 				$('#htmlcode').val(htmlCode);
 				$('#bbcode').val(bbCode);
 				$('#preview').html(htmlCode);
@@ -197,8 +202,8 @@
 					and I want my 
 					<input type="text" id="latest" maxlength="2" value="5" /> 
 					<select id="sort">
-						<option value="date-posted-desc">latest</option>
-						<option value="interestingness-desc">most popular</option>
+						<option value="">latest</option>
+						<option value="p">most popular</option>
 					</select>
 					photos
 				</p>
@@ -223,10 +228,10 @@
 				</div>
 				<br />
 				<p class="tiny">HTML code (web pages, emails):
-					<textarea id="htmlcode"><a href="http://localhost:8000/url/mendhak/1"><img src="http://localhost:8000/img/mendhak/1/s" /></a><a href="http://localhost:8000/url/mendhak/2"><img src="http://localhost:8000/img/mendhak/2/s" /></a><a href="http://localhost:8000/url/mendhak/3"><img src="http://localhost:8000/img/mendhak/3/s" /></a><a href="http://localhost:8000/url/mendhak/4"><img src="http://localhost:8000/img/mendhak/4/s" /></a><a href="http://localhost:8000/url/mendhak/5"><img src="http://localhost:8000/img/mendhak/5/s" /></a></textarea>
+					<textarea id="htmlcode"><a href="http://localhost:8000/url/mendhak/1/"><img src="http://localhost:8000/img/mendhak/1/s/" /></a><a href="http://localhost:8000/url/mendhak/2/"><img src="http://localhost:8000/img/mendhak/2/s/" /></a><a href="http://localhost:8000/url/mendhak/3/"><img src="http://localhost:8000/img/mendhak/3/s/" /></a><a href="http://localhost:8000/url/mendhak/4/"><img src="http://localhost:8000/img/mendhak/4/s/" /></a><a href="http://localhost:8000/url/mendhak/5/"><img src="http://localhost:8000/img/mendhak/5/s/" /></a></textarea>
 				</p>
 				<p class="tiny">BB code (message boards, forums):
-					<textarea id="bbcode">[url=http://localhost:8000/url/mendhak/1][img]http://localhost:8000/img/mendhak/1/s[/img][/url][url=http://localhost:8000/url/mendhak/2][img]http://localhost:8000/img/mendhak/2/s[/img][/url][url=http://localhost:8000/url/mendhak/3][img]http://localhost:8000/img/mendhak/3/s[/img][/url][url=http://localhost:8000/url/mendhak/4][img]http://localhost:8000/img/mendhak/4/s[/img][/url][url=http://localhost:8000/url/mendhak/5][img]http://localhost:8000/img/mendhak/5/s[/img][/url]</textarea>
+					<textarea id="bbcode">[url=http://localhost:8000/url/mendhak/1/][img]http://localhost:8000/img/mendhak/1/s/[/img][/url][url=http://localhost:8000/url/mendhak/2/][img]http://localhost:8000/img/mendhak/2/s/[/img][/url][url=http://localhost:8000/url/mendhak/3/][img]http://localhost:8000/img/mendhak/3/s/[/img][/url][url=http://localhost:8000/url/mendhak/4/][img]http://localhost:8000/img/mendhak/4/s/[/img][/url][url=http://localhost:8000/url/mendhak/5/][img]http://localhost:8000/img/mendhak/5/s/[/img][/url]</textarea>
 				</p>
 				<br />
 			 </div> 
