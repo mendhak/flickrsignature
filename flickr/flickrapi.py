@@ -28,8 +28,12 @@ def getPhoto(apiKey, nsid, photoNumber, popular):
 
 
 def getNSID(apiKey, username):
+
+	if not 'http://' in username:
+		username = 'http://www.flickr.com/photos/' + username
+
 	if not re.match("([0-9]+@N[0-9]+)", username):
-		lookupUrl = "http://api.flickr.com/services/rest/?method=flickr.urls.lookupUser&api_key={0}&url=www.flickr.com/photos/{1}".format(apiKey, username)
+		lookupUrl = "http://api.flickr.com/services/rest/?method=flickr.urls.lookupUser&api_key={0}&url={1}".format(apiKey, username)
 		dom = minidom.parse(urllib.urlopen(lookupUrl))
 		userNode = dom.getElementsByTagName("user")[0]
 		nsid = userNode.getAttribute("id")

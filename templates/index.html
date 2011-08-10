@@ -50,6 +50,9 @@
 			#latest {
 				width: 25px;
 			}
+			#username {
+				width: 450px;
+			}
 
 		.generate {
 			-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
@@ -101,7 +104,7 @@
 
 			$(document).ready(function() {
 		
-					$('textarea').live('focus mouseup', function(e) {
+					$('textarea, input').live('focus mouseup', function(e) {
 					if (e.type == 'focusin') {
 					this.select();
 					}
@@ -207,17 +210,16 @@
 		   		<h1><span style="color: #0063DC;">Flick</span><span style="color: #FF0084">r</span> Signature Generator</h1>
 				<p>Use this page to create a Flickr signature to use on forums, message boards, web pages and emails.  The photos will <strong>update automatically</strong> as you upload new photos or other photos become more popular.</p>
 
-				<p>My flickr username is 
-					<input type="text" id="username" value="mendhak" /> 
-					and I want my 
+				<p>My flickr photostream is at
+					<input type="text" id="username" value="http://www.flickr.com/photos/mendhak" /> 
+				</p>
+					Get the 
 					<input type="text" id="latest" maxlength="2" value="5" /> 
 					<select id="sort">
 						<option value="">latest</option>
 						<option value="p">most popular</option>
 					</select>
-					photos
-				</p>
-				<p>Make them 
+					photos as 
 					<select id="size">
 						<option value="s">small squares</option>
 						<option value="t">thumbnails</option>
@@ -226,7 +228,7 @@
 						<option value="z">medium 640</option>
 						<option value="b">large</option>
 					</select>
-				and link the photos to
+				and link to
 					<select id="linkto">
 						<option value="1">their photo page</option>
 						<option value="2">my photostream</option>

@@ -50,12 +50,18 @@ def nsid(request, username):
 	return resp
 
 def getUserNSID(request, response, apiKey, username):
+	if 'http://' in username or 'www.' in username:
+		userRegex = re.compile(r'photos/(?P<username>[^/]+)')
+		m = userRegex.search(username)
+		username = m.group('username')
+
 	cookies = request.COOKIES
 	cookieKey = str('nsid_' + username)
+	nsidRegex = re.compile("([0-9]+@N[0-9]+)")
 
 	if cookies.has_key(cookieKey):
 		nsid = cookies[cookieKey]
-	elif not re.match("([0-9]+@N[0-9]+)", username) and not cookieKey in cookies:
+	elif not nsidRegex.match(username) and not cookieKey in cookies:
 		nsid = flickrapi.getNSID(apiKey, username)
 		setCookie(response, cookieKey, nsid)
 	else:
