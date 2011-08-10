@@ -116,6 +116,24 @@
 
 			function generateSignature() { 
 				var username = $('#username').val();
+				
+				if (! $.trim(username) == '') {
+					var nsidUrl = 'http://' +  domain + '/nsid/' + $('#username').val();
+					$.get(nsidUrl, function(data) {
+						generateSignatureFor(data);
+					});
+				}
+				else
+				{
+					alert('Please fill in a username');
+					return;
+				}
+			}
+
+
+
+			function generateSignatureFor(username){
+
 				var latest = $('#latest').val();
 				var sortby = $('#sort').val();
 				var size = $('#size').val();
@@ -125,18 +143,6 @@
 				var overallUrlStart = '';
 				var overallUrlEnd = '';
 				var individualLinks = false;
-				
-				if (! $.trim(username) == '') {
-					var nsidUrl = 'http://' +  domain + '/nsid/' + $('#username').val();
-					$.get(nsidUrl, function(data) {
-					  username = data;
-					});
-				}
-				else
-				{
-					alert('Please fill in a username');
-					return;
-				}
 
 				switch(linkto){
 					case '2':
