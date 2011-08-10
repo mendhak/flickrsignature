@@ -18,7 +18,7 @@ def image(request, nsid, num=1, size='', popular=''):
 	if not num or not num.isdigit() or int(num) <= 0:
 		num = 1
 	if not size:
-		size = ''
+		size = 's'
 	if not popular :
 		popular = ''
 
