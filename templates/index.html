@@ -115,6 +115,10 @@
 			});
 
 			function generateSignature() { 
+				$('#htmlcode').val('');
+				$('#bbcode').val('');
+				$('#preview').html('');
+
 				var username = $('#username').val();
 				
 				if (! $.trim(username) == '') {
