@@ -1,9 +1,16 @@
+			html { 
+				height: 100%;
+			}			
+
 			body { 
 				font-family: Verdana, Tahoma;
 				font-size: 14px;
 				line-height: 20px;
 				color: #333;
 				background: #def;
+				height: 100%;
+				margin: 0;
+				padding: 0;
 				}
 
 			#wrap { 
@@ -96,3 +103,10 @@
 			font-weight: bold;
 			padding-right: 5px;
 		}
+
+		#loading {
+			display: none;
+		}
+
+
+		

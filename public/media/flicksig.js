@@ -17,6 +17,7 @@
 			});
 
 			function generateSignature() { 
+				$('#loading').show();
 				$('#htmlcode').val('');
 				$('#bbcode').val('');
 				$('#preview').html('');
@@ -34,6 +35,7 @@
 					alert('Please fill in a username');
 					return;
 				}
+
 			}
 
 
@@ -98,5 +100,6 @@
 				$('#htmlcode').val(htmlCode);
 				$('#bbcode').val(bbCode);
 				$('#preview').html(htmlCode);
+				$('#loading').hide();
 			}
 		
