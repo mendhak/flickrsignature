@@ -14,7 +14,22 @@
 					});
 
 					$('#generate').click( function() { generateSignature(); } );
+
+					$('#username').keypress(function(event){ keyPressHandler(event); });
+					$('#latest').keypress(function(event){ keyPressHandler(event); });
+					$('#size').change( function() { generateSignature(); } );
+					$('#sort').change( function() { generateSignature(); } );
+					$('#linkto').change( function() { generateSignature(); } );
+					
+
 			});
+
+			function keyPressHandler(event){
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if(keycode == '13'){
+					generateSignature();	
+				}
+			}
 
 			function generateSignature() { 
 				$('#loading').show();
