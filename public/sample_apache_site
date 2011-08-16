@@ -1,0 +1,20 @@
+<!-- This is a sample apache2 site configuration file.  -->
+<VirtualHost *:81>
+	DocumentRoot /home/mendhak/Code/flickrsignature/public
+	<Directory /home/mendhak/Code/flickrsignature/public>
+		Options Indexes FollowSymLinks MultiViews +ExecCGI
+		AllowOverride all
+		Order allow,deny
+		Allow from all
+		AddDefaultCharset utf-8
+		DirectoryIndex index.html
+
+	</Directory>
+
+	<Files django.fcgi>
+	    SetHandler fastcgi-script
+	    PythonDebug On
+	</Files>
+
+
+</VirtualHost>
