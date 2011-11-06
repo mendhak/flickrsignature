@@ -15,6 +15,9 @@ flkr.me/**url/123452@N00/4/p**
 This means:  _For user with NSID **123452@N00**, **redirect** me to the URL of their **4**th most **popular** photo_
 
 
+An HTML/JS interface has been provided.  Screenshot below.
+
+
 This has a few uses:
 
 *  You can use JavaScript against your flickr images (slideshows, badges, etc) without revealing your API key
@@ -22,3 +25,5 @@ This has a few uses:
 *  If it's hosted on your server, you get better stats, else just use http://flkr.me
 
 
+
+![Front end screenshot](https://github.com/mendhak/flickrsignature/raw/master/flkrme.png)
