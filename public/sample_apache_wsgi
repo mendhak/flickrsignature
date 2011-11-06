@@ -1,0 +1,15 @@
+<VirtualHost *>
+    ServerName flkr.me
+    DirectoryIndex index.html
+    DocumentRoot /home/mendhak/flickrsignature/public
+
+   WSGIScriptAlias / /home/mendhak/flickrsignature/public/wsgi.py
+   WSGIDaemonProcess fs_com user=mendhak group=mendhak processes=1 threads=10
+   WSGIProcessGroup fs_com
+
+   Alias /media /home/mendhak/flickrsignature/public/media/
+   <Location "/media">
+      SetHandler None
+   </Location>
+
+</VirtualHost>
