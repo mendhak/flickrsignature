@@ -1,12 +1,6 @@
 import os, sys
 
-path = '/home/mendhak/flickrsignature'
-if path not in sys.path:
-    sys.path.append(path)
-
-print sys.path
-
-#sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 import django.core.handlers.wsgi
