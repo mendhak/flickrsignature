@@ -1,4 +1,10 @@
 <VirtualHost *>
+    ServerName www.flkr.me
+    ServerAlias *.flkr.me
+    Redirect permanent / http://flkr.me/
+</VirtualHost>
+
+<VirtualHost *>
     ServerName flkr.me
     DirectoryIndex index.html
     DocumentRoot /home/mendhak/flickrsignature/public
@@ -7,9 +13,10 @@
    WSGIDaemonProcess fs_com user=mendhak group=mendhak processes=1 threads=10
    WSGIProcessGroup fs_com
 
-   Alias /media /home/mendhak/flickrsignature/public/media/
-   <Location "/media">
+   Alias /static /home/mendhak/flickrsignature/static/
+   <Location "/static">
       SetHandler None
    </Location>
+
 
 </VirtualHost>
