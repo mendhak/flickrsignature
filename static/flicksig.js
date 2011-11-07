@@ -104,6 +104,7 @@
 				}
 
 				htmlCode += overallAnchorEnd;
+				bbCode += overallUrlEnd;
 
 				//Cleanup, replace //" and //[
 				htmlCode = htmlCode.replace(/\/\/"/g, '"');
