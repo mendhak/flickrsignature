@@ -75,7 +75,7 @@ def getUserNSID(request, response, apiKey, username):
 
 
 def main(request):
-	return render_to_response('index.html', {'domain': request.get_host()}, context_instance=RequestContext(request))
+	return render_to_response('sig.html', {'domain': request.get_host()}, context_instance=RequestContext(request))
 
 
 def setCookie(response, cookieKey, nsid, expire=None):
