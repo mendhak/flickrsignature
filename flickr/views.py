@@ -34,6 +34,31 @@ def image(request, nsid, num=1, size='', popular=''):
 	resp['Location'] = destinationUrl
 	return resp
 
+def searchImage(request, tags='', num=1, size='', nsid='' ):
+	if not num or not num.isdigit() or int(num) <= 0:
+		num = 1
+	if not size:
+		size = 's'
+
+	resp = HttpResponse(status=302)
+	nsid = getUserNSID(request, resp, apiKey, nsid)
+	photo = flickrapi.getPhotoBySearch(apiKey, nsid, tags, num)
+	destinationUrl = flickrapi.getImageUrl(photo, size)
+	resp['Cache-Control'] = "private, max-age=3600"
+	resp['Location'] = destinationUrl
+	return resp
+
+def searchRedirect(request, tags='', num=1, nsid=''):
+	if not num or not num.isdigit() or int(num) <= 0:
+		num = 1
+	resp = HttpResponse(status=302)
+	nsid = getUserNSID(request, resp, apiKey, nsid)
+	photo = flickrapi.getPhotoBySearch(apiKey, nsid, tags, num)
+	destinationUrl = flickrapi.getPhotoPageUrl(photo)
+	resp['Location'] = destinationUrl
+	return resp
+
+
 def redirect(request, nsid, num, popular):
 	if not num or not num.isdigit() or int(num) <= 0:
 		num = 1
@@ -54,6 +79,10 @@ def nsid(request, username):
 	return resp
 
 def getUserNSID(request, response, apiKey, username):
+
+	if username is None:
+		return ''
+
 	if 'http://' in username or 'www.' in username:
 		userRegex = re.compile(r'photos/(?P<username>[^/]+)')
 		m = userRegex.search(username)

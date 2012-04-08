@@ -9,6 +9,9 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^(?i)img/(?P<nsid>[A-Za-z0-9@]+)/?(?P<num>[0-9]+)?/?(?P<size>[A-Za-z0-9-]+)?/?(?P<popular>[p]{1})?', 'flickr.views.image'),
     url(r'^(?i)url/(?P<nsid>[A-Za-z0-9@]+)/?(?P<num>[0-9]+)?/?(?P<popular>[p]{1})?', 'flickr.views.redirect'),
+    #url(r'^(?i)imgsearch/(?P<nsid>[A-Za-z0-9@]+)/?(?P<num>[0-9]+)?/?(?P<size>[A-Za-z0-9-]+)?/?(?P<tags>[A-Za-z0-9-]+)?', 'flickr.views.searchImage'),
+    url(r'^(?i)searchimg/(?P<tags>[A-Za-z0-9-]+)/(?P<num>[0-9]+)/?(?P<size>[A-Za-z0-9-]+)?/?(?P<nsid>[A-Za-z0-9@]+)?', 'flickr.views.searchImage'),
+    url(r'^(?i)searchurl/(?P<tags>[A-Za-z0-9-]+)/(?P<num>[0-9]+)/?(?P<nsid>[A-Za-z0-9@]+)?', 'flickr.views.searchRedirect'),
     url(r'^(?i)nsid/(?P<username>.+)', 'flickr.views.nsid'),
     url(r'^signatures$', 'flickr.views.main')
 
