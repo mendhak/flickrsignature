@@ -54,7 +54,7 @@ def searchRedirect(request, tags='', num=1, nsid=''):
 	resp = HttpResponse(status=302)
 	nsid = getUserNSID(request, resp, apiKey, nsid)
 	photo = flickrapi.getPhotoBySearch(apiKey, nsid, tags, num)
-	destinationUrl = flickrapi.getPhotoPageUrl(photo)
+	destinationUrl = flickrapi.getPhotoPageUrl(photo, nsid)
 	resp['Location'] = destinationUrl
 	return resp
 
