@@ -1,8 +1,7 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 import flickrapi
-import time
 import datetime
 import re
 
