@@ -21,12 +21,13 @@ def getPhoto(apiKey, nsid, photoNumber, popular):
 	photo.server = photoNode.getAttribute("server")
 	photo.farm = photoNode.getAttribute("farm")
 	photo.secret = photoNode.getAttribute("secret")
+	photo.title = photoNode.getAttribute("title")
 	return photo
 
 
 def getPhotoBySearch(apiKey, nsid, searchTag, photoNumber):
 	photoSearchUrl = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key={0}&user_id={1}&per_page=1&page={2}&tags={3}".format(apiKey, nsid, photoNumber, searchTag)
-	
+
 	dom = minidom.parse(urllib.urlopen(photoSearchUrl))
 
 	photoNode = dom.getElementsByTagName("photo")[0]
@@ -35,6 +36,7 @@ def getPhotoBySearch(apiKey, nsid, searchTag, photoNumber):
 	photo.server = photoNode.getAttribute("server")
 	photo.farm = photoNode.getAttribute("farm")
 	photo.secret = photoNode.getAttribute("secret")
+	photo.title = photoNode.getAttribute("title")
 	return photo
 
 
@@ -50,7 +52,7 @@ def getNSID(apiKey, username):
 		nsid = userNode.getAttribute("id")
 	else:
 		nsid = username
-					
+
 	return nsid
 
 
@@ -112,3 +114,4 @@ class FlickrPhoto:
 	server = ''
 	farm = ''
 	secret = ''
+	title = ''
