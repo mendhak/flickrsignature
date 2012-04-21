@@ -28,7 +28,7 @@ def image(request, nsid, num=1, size='', popular=''):
     photo = flickrapi.getPhoto(apiKey, nsid, num, popular)
     destinationUrl = flickrapi.getImageUrl(photo, size)
     resp['Cache-Control'] = "private, max-age=3600"
-    resp['Title'] = photo.title
+    resp['Title'] = photo.title.encode("utf-8")
     resp['Location'] = destinationUrl
     return resp
 
@@ -43,7 +43,7 @@ def searchImage(request, tags='', num=1, size='', nsid='' ):
     photo = flickrapi.getPhotoBySearch(apiKey, nsid, tags, num)
     destinationUrl = flickrapi.getImageUrl(photo, size)
     resp['Cache-Control'] = "private, max-age=3600"
-    resp['Title'] = photo.title
+    resp['Title'] = photo.title.encode("utf-8")
     resp['Location'] = destinationUrl
     return resp
 
@@ -54,7 +54,7 @@ def searchRedirect(request, tags='', num=1, nsid=''):
     nsid = getUserNSID(request, resp, apiKey, nsid)
     photo = flickrapi.getPhotoBySearch(apiKey, nsid, tags, num)
     destinationUrl = flickrapi.getPhotoPageUrl(photo, nsid)
-    resp['Title'] = photo.title
+    resp['Title'] = photo.title.encode("utf-8")
     resp['Location'] = destinationUrl
     return resp
 
@@ -69,7 +69,7 @@ def redirect(request, nsid, num, popular):
     nsid = getUserNSID(request, resp, apiKey, nsid)
     photo = flickrapi.getPhoto(apiKey, nsid, num, popular)
     destinationUrl = flickrapi.getPhotoPageUrl(photo, nsid)
-    resp['Title'] = photo.title
+    resp['Title'] = photo.title.encode("utf-8")
     resp['Location'] = destinationUrl
     return resp
 
