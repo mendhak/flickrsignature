@@ -18,5 +18,6 @@
       SetHandler None
    </Location>
 
+   Header set Access-Control-Allow-Origin *
 
 </VirtualHost>

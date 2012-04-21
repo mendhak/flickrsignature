@@ -16,5 +16,6 @@
 	    PythonDebug On
 	</Files>
 
+	Header set Access-Control-Allow-Origin *
 
 </VirtualHost>
