@@ -1,3 +1,4 @@
+import httplib
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
@@ -77,6 +78,32 @@ def nsid(request, username):
     nsid = getUserNSID(request, resp, apiKey, username)
     resp.write(nsid)
     return resp
+
+
+def readTitleFromHeader(url):
+
+    #Manually parse URL, Apache may remove double slashes
+    lastSlash = url.rfind('/', 0,8)
+    pathPos = url.find('/',lastSlash+1)
+
+    if pathPos > -1:
+        conn = httplib.HTTPConnection(str(url[lastSlash+1:pathPos]))
+        conn.request("HEAD", str(url[pathPos:]))
+        res = conn.getresponse()
+        title = res.getheader('Title')
+
+    if title is None:
+        title = ""
+
+    return title
+
+
+def getTitleFromUrl(request, url):
+    resp = HttpResponse()
+    title = readTitleFromHeader(url)
+    resp.write(title)
+    return resp
+
 
 def getUserNSID(request, response, apiKey, username):
 
