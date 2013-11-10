@@ -1,9 +1,10 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, include, url
 from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
+from django.views.generic import TemplateView
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,7 +14,10 @@ urlpatterns = patterns('',
     url(r'^(?i)searchurl/(?P<tags>[A-Za-z0-9-]+)/(?P<num>[0-9]+)/?(?P<nsid>[A-Za-z0-9@]+)?', 'flickr.views.searchRedirect'),
     url(r'^(?i)nsid/(?P<username>.+)', 'flickr.views.nsid'),
     url(r'^(?i)gettitlefromurl/(?P<url>.+)', 'flickr.views.getTitleFromUrl'),
-    url(r'^signatures$', 'flickr.views.main')
+    url(r'^signatures$', 'flickr.views.main'),
+     url(r'^$', TemplateView.as_view(template_name="index.html")),
+
+
 
     # url(r'^easyflickrurl/', include('easyflickrurl.foo.urls')),
 
